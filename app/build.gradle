@@ -1,0 +1,96 @@
+import java.text.SimpleDateFormat
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
+    buildToolsVersion rootProject.ext.versions.buildToolsVersion
+
+
+    //指定jdk版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId 'com.supcon.whd.mes'
+        manifestPlaceholders = [app_name: "app", app_icon: "@mipmap/ic_launcher"]
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
+        versionCode rootProject.ext.versions.versionCode
+        versionName rootProject.ext.versions.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //MultiDex分包方法
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+    }
+    signingConfigs {
+        keystore {
+            keyAlias 'mobile'
+            keyPassword '123456'
+            storeFile file('./mobile.jks')
+            storePassword '654321'
+        }
+    }
+    buildTypes {
+
+        release {
+//            buildConfigField "String", "PACKAGE_CODE", "${rootProject.ext.ProductCode}.${rootProject.ext.MobileCode}"
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
+            minifyEnabled true
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.keystore
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "MES(M)-V${rootProject.ext.ProductCode}.${rootProject.ext.MobileCode}-${releaseTime()}-C.apk"
+                }
+
+            }
+
+            //是否进行zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+        }
+        debug {
+
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            multiDexEnabled true
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //公用依赖包
+    implementation project(':common')
+    if (!Boolean.valueOf(rootProject.ext.isModule)) {
+        //main模块
+        implementation project(':login')
+        implementation project(':middle')
+    }
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
+    annotationProcessor project(':compiler')
+
+
+}
+static def releaseTime() {
+    return new SimpleDateFormat("yyyyMMdd").format(new Date(System.currentTimeMillis()))
+//    return "20191118"
+}

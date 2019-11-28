@@ -1,0 +1,86 @@
+apply plugin: 'com.android.library'
+
+//apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.versions.compileSdkVersion
+    buildToolsVersion rootProject.ext.versions.buildToolsVersion
+
+    //支持Java8
+    defaultConfig.javaCompileOptions {
+        annotationProcessorOptions {
+            includeCompileClasspath = true
+        }
+    }
+    //指定jdk版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.versions.minSdkVersion
+        targetSdkVersion rootProject.ext.versions.targetSdkVersion
+        versionCode rootProject.ext.versions.versionCode
+        versionName rootProject.ext.versions.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //MultiDex分包方法
+        multiDexEnabled true
+
+
+    }
+
+
+    buildTypes {
+        release {
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFile 'proguard-rules.pro'
+            }
+        }
+    }
+    //防止编译的时候oom、GC
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+
+}
+
+dependencies {
+    // 在项目中的libs中的所有的.jar结尾的文件，都是依赖
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //把implementation 用api代替,它是对外部公开的, 所有其他的module就不需要添加该依赖
+    api rootProject.ext.dependencies["appcompat_v7"]
+    api rootProject.ext.dependencies["constraint_layout"]
+    api rootProject.ext.dependencies["recyclerview-v7"]
+    api rootProject.ext.dependencies["support-v4"]
+    api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["support_annotations"]
+//    api rootProject.ext.dependencies["kotlin-api"]
+
+    //MultiDex分包方法
+    api rootProject.ext.dependencies["multidex"]
+    api rootProject.ext.dependencies["multidex-instrumentation"]
+
+    //Arouter路由
+//    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
+    api rootProject.ext.dependencies["arouter_api"]
+    api rootProject.ext.dependencies["butterknife_api"]
+
+    //rxjava2  rxandroid retrofit2 okhttp3
+    api rootProject.ext.dependencies["okHttp_api"]
+    api rootProject.ext.dependencies["gson_api"]
+    api rootProject.ext.dependencies["retrofit_api"]
+    api rootProject.ext.dependencies["converter-gson_api"]
+    api rootProject.ext.dependencies["adapter-rxjava2_api"]
+    api rootProject.ext.dependencies["rxjava_api"]
+    api rootProject.ext.dependencies["rxandroid_api"]
+    api rootProject.ext.dependencies["loging_interceptor_api"]
+    api rootProject.ext.dependencies["loading_api"]
+    api project(':annotation')
+//    annotationProcessor  "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
+}
