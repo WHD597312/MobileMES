@@ -1,4 +1,4 @@
-package com.supcon.whd.login;
+package com.supcon.whd.login.ui;
 
 
 import android.util.Log;
@@ -10,10 +10,13 @@ import com.supcon.whd.common.annotation.Presenter;
 import com.supcon.whd.common.base.ui.activity.BasePresenterActivity;
 import com.supcon.whd.common.constant.Constant;
 import com.supcon.whd.common.utils.StatusBarUtils;
+import com.supcon.whd.login.R;
+import com.supcon.whd.login.R2;
 import com.supcon.whd.login.model.api.LoginAPI;
 import com.supcon.whd.login.model.bean.LoginEntity;
 import com.supcon.whd.login.model.contract.ContractLogin;
 import com.supcon.whd.login.presenter.LoginPresenter;
+import com.thejoyrun.router.ActivityHelper;
 import com.thejoyrun.router.RouterActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -21,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
 @RouterActivity(Constant.Router.LOGIN)
@@ -34,7 +38,7 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
     @BindView(R2.id.loginPswd)
     EditText loginPswd;
     @Override
-    public int getLayoutID() {
+    public int getLayoutId() {
         return R.layout.activity_login;
     }
 
@@ -48,21 +52,29 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
     public void onClick(View view){
         int id=view.getId();
         if (id==R.id.loginBtn){
-            String phone=loginName.getText().toString();
+            String username=loginName.getText().toString();
             String password=loginPswd.getText().toString();
-            onLoading("正在加载...");
+            onLoading("正在登录...");
             Flowable.timer(300, TimeUnit.MILLISECONDS)
                     .subscribe(s->{
-                        presenterRouter.create(LoginAPI.class).login(phone,password);
+                        presenterRouter.create(LoginAPI.class).login(username,password);
                     });
-
         }
     }
+
+
+
     @Override
     public void doLoginSuccess(LoginEntity loginEntity) {
         Log.i("LoginEntity",loginEntity.toString());
 //        Toast.makeText(this,loginEntity.toString(),Toast.LENGTH_SHORT).show();
         onLoadSuccess("登录成功!");
+        Flowable.timer(300,TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(o->{
+                    ActivityHelper.builder(Constant.Router.MAIN).start(LoginActivity.this);
+                });
+
     }
 
     @Override

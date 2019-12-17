@@ -47,7 +47,6 @@ android {
         javaMaxHeapSize "4g"
     }
 
-
 }
 
 dependencies {
@@ -81,6 +80,11 @@ dependencies {
     api rootProject.ext.dependencies["rxandroid_api"]
     api rootProject.ext.dependencies["loging_interceptor_api"]
     api rootProject.ext.dependencies["loading_api"]
+    api rootProject.ext.dependencies["pulltorefresh_api"]
+    api rootProject.ext.dependencies["zxing_code_api"]
+    api rootProject.ext.dependencies["zxing-android-embedded_api"]
+    api 'com.github.donkingliang:ImageSelector:1.6.8'
     api project(':annotation')
+
 //    annotationProcessor  "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
 }

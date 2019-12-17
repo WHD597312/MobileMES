@@ -6,7 +6,7 @@ import android.content.Context;
 import com.thejoyrun.router.Router;
 
 public class BaseApplication  extends Application {
-    public static String baseUrl="http://47.111.101.184:8095/qjjc/";
+    public static String baseUrl="http://192.168.90.147:8080/";
 
     private static Context mContext;
     public static Context getContext(){

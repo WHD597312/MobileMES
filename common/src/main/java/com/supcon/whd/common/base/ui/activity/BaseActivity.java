@@ -1,14 +1,14 @@
 package com.supcon.whd.common.base.ui.activity;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.WindowManager;
 
-import com.supcon.whd.common.base.ui.view.CustomDialog;
 import com.supcon.whd.common.base.ui.view.CustomLoad;
 
 import java.util.concurrent.TimeUnit;
@@ -29,15 +29,21 @@ public abstract class BaseActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view= LayoutInflater.from(this).inflate(getLayoutID(),null);
-        setContentView(view);
+        setContentView(getLayoutId());
         unbinder= ButterKnife.bind(this);
         onInit();
         initView();
+        onListener();
+    }
+    protected void onListener(){
+
     }
 
+    protected int getDimen(int dimen){
+        return (int) getResources().getDimension(dimen);
+    }
     CustomLoad dialogLoad;
-    public void onLoading(String load) {
+    protected void onLoading(String load) {
 
         if (dialogLoad != null && dialogLoad.isShowing()) {
             return;
@@ -53,7 +59,12 @@ public abstract class BaseActivity  extends AppCompatActivity {
         dialogLoad.setOnCancelListener(dialogInterface->{
             backgroundAlpha(1.0f);
         });
-        dialogLoad.show();
+        if (dialogLoad!=null){
+            dialogLoad.show();
+        }
+    }
+    protected void back(){
+        finish();
     }
     //设置蒙版
     private void backgroundAlpha(float f) {
@@ -61,7 +72,7 @@ public abstract class BaseActivity  extends AppCompatActivity {
         lp.alpha = f;
         getWindow().setAttributes(lp);
     }
-    public void onLoadSuccess(String load){
+    protected void onLoadSuccess(String load){
         if (dialogLoad!=null && dialogLoad.isShowing()){
             dialogLoad.onLoadSuccess(load);
             backgroundAlpha(1.0f);
@@ -90,7 +101,7 @@ public abstract class BaseActivity  extends AppCompatActivity {
         }
     }
 
-    public abstract int getLayoutID();
+    public abstract int getLayoutId();
     public abstract void onInit();
     public abstract void initView();
 

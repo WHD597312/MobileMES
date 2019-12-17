@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_90"
+    android:layout_height="wrap_content"
+    android:id="@+id/itemWorkView"
+    >
+
+    <ImageView
+        android:id="@+id/itemWorkImg"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:src="@drawable/ic_list"
+        android:scaleType="centerInside"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:id="@+id/itemWorkTv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@+id/itemWorkImg"
+        android:textSize="@dimen/sp_18"
+        android:text="菜单"
+        android:gravity="center"
+        android:textColor="@color/black"
+        />
+</RelativeLayout>

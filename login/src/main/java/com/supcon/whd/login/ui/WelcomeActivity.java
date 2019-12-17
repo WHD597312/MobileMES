@@ -1,9 +1,10 @@
-package com.supcon.whd.login;
+package com.supcon.whd.login.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.supcon.whd.common.constant.Constant;
+import com.supcon.whd.login.R;
 import com.thejoyrun.router.ActivityHelper;
 
 

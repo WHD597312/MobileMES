@@ -2,6 +2,8 @@ package com.supcon.whd.common.base.network;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.supcon.whd.common.base.BaseApplication;
 import com.supcon.whd.common.utils.NetWorkUtil;
 
@@ -72,15 +74,17 @@ public class Api {
             }
         });
         logInterceptor.setLevel(isDebug?HttpLoggingInterceptor.Level.BODY:HttpLoggingInterceptor.Level.NONE);
+        Gson gson = new GsonBuilder().setLenient().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls().create();
         String path=BaseApplication.baseUrl;
         retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(path)
                 .client(new OkHttpClient.Builder()
                         .connectTimeout(5, TimeUnit.SECONDS)//设置连接超时
                         .readTimeout(5, TimeUnit.SECONDS)//读取超时
                         .writeTimeout(5, TimeUnit.SECONDS)//写入超时
+                        .addInterceptor(new LoginInterceptor())
                         .addNetworkInterceptor(logInterceptor)//添加自定义缓存拦截器（后面讲解），注意这里需要使用.addNetworkInterceptor
 //                            .cache(cache)//把缓存添加进来
 
