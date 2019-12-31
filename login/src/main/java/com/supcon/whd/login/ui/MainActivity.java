@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity {
     public void onInit() {
         list.add(new WorkEntity(R.drawable.ic_list,"列表",Constant.Router.STUDENTLIST));
         list.add(new WorkEntity(R.drawable.ic_qrcode,"二维码",Constant.Router.QRSCAN));
+        list.add(new WorkEntity(R.drawable.ic_custom,"自定义",Constant.Router.CUSTOM));
     }
 
     DisplayMetrics outMetrics;
@@ -116,6 +117,8 @@ public class MainActivity extends BaseActivity {
                 WorkEntity workEntity=adapter.getItemEntity(position);
                 if (Constant.Router.STUDENTLIST.equals(workEntity.router)){
                     ActivityHelper.builder(Constant.Router.STUDENTLIST).start(MainActivity.this);
+                }else if (Constant.Router.CUSTOM.equals(workEntity.router)){
+                    ActivityHelper.builder(Constant.Router.CUSTOM).start(MainActivity.this);
                 }else if (Constant.Router.QRSCAN.equals(workEntity.router)) {
                     new IntentIntegrator(MainActivity.this)
                             .setOrientationLocked(true)

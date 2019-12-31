@@ -13,6 +13,10 @@ import com.supcon.whd.login.R;
 
 import java.util.ArrayList;
 
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 public class QRScanActivity extends BaseScanActivity {
 
     @Override
@@ -26,9 +30,14 @@ public class QRScanActivity extends BaseScanActivity {
             ArrayList<String> images= data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
             if (images!=null && !images.isEmpty()){
                 String path=images.get(0);
-                Bitmap bitmap= BitmapFactory.decodeFile(path);
-                String result= ZXingUtils.parseQRcode(bitmap);
-                Log.i("ParseImage","-->"+result);
+                Flowable.just(path)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.io())
+                        .subscribe(s -> {
+                            Bitmap bitmap= BitmapFactory.decodeFile(s);
+                            String result= ZXingUtils.parseQRcode(bitmap);
+                            Log.i("ParseImage","-->"+result);
+                        });
             }
         }
     }

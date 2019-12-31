@@ -2,6 +2,7 @@ package com.supcon.whd.common.base.ui.activity;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.supcon.whd.common.base.ui.view.CustomLoad;
+import com.supcon.whd.common.utils.DensityUtils;
+import com.supcon.whd.common.utils.ScreenUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,18 +26,28 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseActivity  extends AppCompatActivity {
 
     protected View view;
-
+    protected Context context;
     Unbinder unbinder;
     Disposable mDisposable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.context=this;
+
+        DensityUtils.setOrientation(this,getOrientation());
+
         setContentView(getLayoutId());
         unbinder= ButterKnife.bind(this);
         onInit();
         initView();
         onListener();
     }
+
+    protected String getOrientation(){
+        return ScreenUtil.WIDTH;
+    }
+
+
     protected void onListener(){
 
     }
@@ -67,7 +80,7 @@ public abstract class BaseActivity  extends AppCompatActivity {
         finish();
     }
     //设置蒙版
-    private void backgroundAlpha(float f) {
+    protected void backgroundAlpha(float f) {
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.alpha = f;
         getWindow().setAttributes(lp);

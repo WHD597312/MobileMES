@@ -74,13 +74,12 @@ public class ZXingUtils {
         }
         return null;
     }
+
     /**
      * 生成条形码的Bitmap
      *
-     * @param contents
-     *            需要生成的内容
-     * @param format
-     *            编码格式
+     * @param contents      需要生成的内容
+     * @param format        编码格式
      * @param desiredWidth
      * @param desiredHeight
      * @return
@@ -153,8 +152,7 @@ public class ZXingUtils {
      *
      * @param first
      * @param second
-     * @param fromPoint
-     *            第二个Bitmap开始绘制的起始位置（相对于第一个Bitmap）
+     * @param fromPoint 第二个Bitmap开始绘制的起始位置（相对于第一个Bitmap）
      * @return
      */
     protected static Bitmap mixtureBitmap(Bitmap first, Bitmap second,
@@ -178,28 +176,24 @@ public class ZXingUtils {
 
     /**
      * 解析二维码图片的内容
+     *
      * @param bitmap
      * @return
      */
-    public static String parseQRcode(Bitmap bitmap){
-        String result=null;
-//        Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        int[] data = new int[width * height];
+    public static String parseQRcode(Bitmap bitmap) {
+        String result = null;
         try {
-        bitmap.getPixels(data, 0, width, 0, 0, width, height);    //得到像素
-        RGBLuminanceSource source = new RGBLuminanceSource(width,height,data);   //RGBLuminanceSource对象
-        BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
-        QRCodeReader reader = new QRCodeReader();
-        Result re = null;
-            //得到结果
-            re = reader.decode(bitmap1);
-            result=re.getText();
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        } catch (ChecksumException e) {
-            e.printStackTrace();
+//        Bitmap image = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            int[] data = new int[width * height];
+
+            bitmap.getPixels(data, 0, width, 0, 0, width, height);    //得到像素
+            RGBLuminanceSource source = new RGBLuminanceSource(width, height, data);   //RGBLuminanceSource对象
+            BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
+            QRCodeReader reader = new QRCodeReader();
+            Result re = reader.decode(bitmap1);
+            result = re.getText();
         } catch (Exception e) {
             e.printStackTrace();
         }

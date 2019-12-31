@@ -84,6 +84,7 @@ dependencies {
     api rootProject.ext.dependencies["zxing_code_api"]
     api rootProject.ext.dependencies["zxing-android-embedded_api"]
     api 'com.github.donkingliang:ImageSelector:1.6.8'
+    api 'com.weigan:loopView:0.1.2'
     api project(':annotation')
 
 //    annotationProcessor  "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"

@@ -6,6 +6,7 @@ public interface Constant {
         String MAIN="MAIN";
         String STUDENTLIST="STUDENTLIST";
         String QRSCAN="QRSCAN";
+        String CUSTOM="CUSTOM";
     }
     interface ModelApi{
         String LOGIN="Login";

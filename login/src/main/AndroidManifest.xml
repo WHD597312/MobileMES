@@ -38,6 +38,13 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
             />
+        <activity
+            android:name=".ui.CustomViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            />
+
 
     </application>
 

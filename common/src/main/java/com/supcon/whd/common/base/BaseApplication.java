@@ -3,6 +3,8 @@ package com.supcon.whd.common.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.supcon.whd.common.utils.DensityUtils;
+import com.supcon.whd.common.utils.ScreenUtil;
 import com.thejoyrun.router.Router;
 
 public class BaseApplication  extends Application {
@@ -17,5 +19,6 @@ public class BaseApplication  extends Application {
         super.onCreate();
         mContext=this;
         Router.init("MobileMES");
+        DensityUtils.setDensity(this);
     }
 }
