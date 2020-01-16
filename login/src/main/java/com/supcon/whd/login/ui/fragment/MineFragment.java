@@ -1,6 +1,6 @@
 package com.supcon.whd.login.ui.fragment;
 
-import com.supcon.whd.common.base.ui.BaseFragment;
+import com.supcon.whd.common.base.ui.fragment.BaseFragment;
 import com.supcon.whd.login.R;
 
 public class MineFragment extends BaseFragment {

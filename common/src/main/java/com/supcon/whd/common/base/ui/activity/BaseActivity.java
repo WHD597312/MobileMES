@@ -9,8 +9,11 @@ import android.text.TextUtils;
 
 import android.view.View;
 import android.view.WindowManager;
-
 import com.supcon.whd.common.base.ui.view.CustomLoad;
+import com.supcon.whd.common.swipelayout.SwipeBackActivityBase;
+import com.supcon.whd.common.swipelayout.SwipeBackActivityHelper;
+import com.supcon.whd.common.swipelayout.SwipeBackLayout;
+import com.supcon.whd.common.swipelayout.Utils;
 import com.supcon.whd.common.utils.DensityUtils;
 import com.supcon.whd.common.utils.ScreenUtil;
 
@@ -23,24 +26,50 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
 
-public abstract class BaseActivity  extends AppCompatActivity {
+public abstract class BaseActivity  extends AppCompatActivity implements SwipeBackActivityBase {
 
     protected View view;
     protected Context context;
     Unbinder unbinder;
     Disposable mDisposable;
+    private SwipeBackActivityHelper mHelper;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        mHelper = new SwipeBackActivityHelper(this);
+        mHelper.onActivityCreate();
         this.context=this;
-
         DensityUtils.setOrientation(this,getOrientation());
-
         setContentView(getLayoutId());
         unbinder= ButterKnife.bind(this);
         onInit();
         initView();
         onListener();
+    }
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mHelper.onPostCreate();
+    }
+
+
+    @Override
+    public SwipeBackLayout getSwipeBackLayout() {
+        return mHelper.getSwipeBackLayout();
+    }
+
+    @Override
+    public void setSwipeBackEnable(boolean enable) {
+        getSwipeBackLayout().setEnableGesture(enable);
+    }
+
+    @Override
+    public void scrollToFinishActivity() {
+        Utils.convertActivityToTranslucent(this);
+        getSwipeBackLayout().scrollToFinishActivity();
     }
 
     protected String getOrientation(){
@@ -116,7 +145,15 @@ public abstract class BaseActivity  extends AppCompatActivity {
 
     public abstract int getLayoutId();
     public abstract void onInit();
-    public abstract void initView();
+    protected  void initView(){
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        back();
+    }
 
     @Override
     protected void onDestroy() {

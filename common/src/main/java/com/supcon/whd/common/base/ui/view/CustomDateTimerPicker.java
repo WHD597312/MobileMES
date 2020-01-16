@@ -1,7 +1,10 @@
 package com.supcon.whd.common.base.ui.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -19,9 +22,9 @@ import java.util.Calendar;
 import java.util.List;
 
 
-public class CustomDateTimerPicker extends PopupWindow {
+public class CustomDateTimerPicker extends Dialog {
     private Context context;
-    private View view;
+//    private View view;
     private List<String> years, months, hours, mins, seconds;
     private List<String> days, days2;
     private List<String> nonleapYearFeb, leapYearFeb;
@@ -30,30 +33,33 @@ public class CustomDateTimerPicker extends PopupWindow {
     private String type = "yyyy-MM-dd HH:mm:ss";
     private int dayIndex=0;
 
-
-
-    public CustomDateTimerPicker(Context context) {
-        this.context = context;
-        this.setFocusable(true);
-        this.setOutsideTouchable(true);
-        this.update();
-
-        view = View.inflate(context, R.layout.ly_date_timer2, null);
-        this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        this.setContentView(view);
-        loopYear = view.findViewById(R.id.loopYear);
-        loopMonth = view.findViewById(R.id.loopMonth);
-        loopDay = view.findViewById(R.id.loopDay);
-        loopHour = view.findViewById(R.id.loopHour);
-        loopMin = view.findViewById(R.id.loopMin);
-        loopSecond = view.findViewById(R.id.loopSecond);
+    public CustomDateTimerPicker(@NonNull Context context) {
+        super(context, R.style.MyDialog2);
+        this.context=context;
     }
 
-    public CustomDateTimerPicker initPopTimer(View parent) {
-        if (this != null && this.isShowing())
-            return this;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.ly_date_timer2);
+        loopYear =findViewById(R.id.loopYear);
+        loopMonth = findViewById(R.id.loopMonth);
+        loopDay = findViewById(R.id.loopDay);
 
+        loopHour = findViewById(R.id.loopHour);
+        loopMin = findViewById(R.id.loopMin);
+        loopSecond = findViewById(R.id.loopSecond);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initPopTimer();
+    }
+
+    public void initPopTimer() {
+        if (this != null && this.isShowing())
+            return;
         if ("yyyy-MM-dd HH:mm:ss".equals(type)) {
             getYears();
             getMonths();
@@ -65,8 +71,8 @@ public class CustomDateTimerPicker extends PopupWindow {
             getMins();
             getSeconds();
         }
-        ImageView imgEnsure = view.findViewById(R.id.imgEnsure);
-        ImageView imgCancel = view.findViewById(R.id.imgCancel);
+        ImageView imgEnsure = findViewById(R.id.imgEnsure);
+        ImageView imgCancel = findViewById(R.id.imgCancel);
 
         if (needYear) {
             loopYear.setItems(years);
@@ -342,7 +348,6 @@ public class CustomDateTimerPicker extends PopupWindow {
                 if (id == R.id.imgCancel) {
                     dismiss();
                 } else {
-
                     Log.i("selectedItem", "selectedItemYear=" + year + ",selectedItemMonth=" + month +
                             ",selectedItemDay=" + day + ",selectedItemHour=" + hour + ",selectedItemMin=" + min
                             + ",selectedItemSecond=" + second);
@@ -356,8 +361,7 @@ public class CustomDateTimerPicker extends PopupWindow {
         };
         imgCancel.setOnClickListener(onClickListener);
         imgEnsure.setOnClickListener(onClickListener);
-        this.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-        return this;
+//        this.showAtLocation(parent, Gravity.BOTTOM | Gravity.CENTER, 0, 0);
     }
 
 

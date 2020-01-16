@@ -53,6 +53,8 @@ dependencies {
     // 在项目中的libs中的所有的.jar结尾的文件，都是依赖
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //把implementation 用api代替,它是对外部公开的, 所有其他的module就不需要添加该依赖
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     api rootProject.ext.dependencies["appcompat_v7"]
     api rootProject.ext.dependencies["constraint_layout"]
     api rootProject.ext.dependencies["recyclerview-v7"]
@@ -86,6 +88,8 @@ dependencies {
     api 'com.github.donkingliang:ImageSelector:1.6.8'
     api 'com.weigan:loopView:0.1.2'
     api project(':annotation')
+    api 'com.daimajia.swipelayout:library:1.2.0@aar'
+
 
 //    annotationProcessor  "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
 }

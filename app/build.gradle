@@ -2,6 +2,15 @@ import java.text.SimpleDateFormat
 apply plugin: 'com.android.application'
 
 android {
+
+    signingConfigs {
+        release {
+            storeFile file('D:/zgs-work/MobileMES/app/mobile.jks')
+            storePassword '123456'
+            keyAlias = 'mobile'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion rootProject.ext.versions.compileSdkVersion
     buildToolsVersion rootProject.ext.versions.buildToolsVersion
 
@@ -20,8 +29,6 @@ android {
         versionCode rootProject.ext.versions.versionCode
         versionName rootProject.ext.versions.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        //MultiDex分包方法
-        multiDexEnabled true
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -29,35 +36,17 @@ android {
             }
         }
     }
-    signingConfigs {
-        keystore {
-            keyAlias 'mobile'
-            keyPassword '123456'
-            storeFile file('./mobile.jks')
-            storePassword '654321'
-        }
-    }
+
     buildTypes {
 
         release {
-//            buildConfigField "String", "PACKAGE_CODE", "${rootProject.ext.ProductCode}.${rootProject.ext.MobileCode}"
-            buildConfigField "boolean", "LOG_DEBUG", "false"
-
-            minifyEnabled true
-            multiDexEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.keystore
-            applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "MES(M)-V${rootProject.ext.ProductCode}.${rootProject.ext.MobileCode}-${releaseTime()}-C.apk"
-                }
-
-            }
-
             //是否进行zipalign优化
             zipAlignEnabled true
             // 移除无用的resource文件
             shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         debug {
 

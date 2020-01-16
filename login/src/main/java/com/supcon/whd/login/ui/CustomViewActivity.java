@@ -1,6 +1,7 @@
 package com.supcon.whd.login.ui;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 
@@ -47,19 +48,16 @@ public class CustomViewActivity extends BaseActivity {
 //            DateTimerPicker dateTimerPicker=new DateTimerPicker(this,contentView);
 //            dateTimerPicker.initPopTimer(btnDatePicker,R.color.white);
             CustomDateTimerPicker customDateTimerPicker=new CustomDateTimerPicker(this);
-            customDateTimerPicker
-                    .setType(CustomDateTimerPicker.Type.YEAR_MONTH_DAY_HOUR_MIN_SCCOND)
-                    .initPopTimer(btnDatePicker)
-                    .setOnDateTimerPicker(new CustomDateTimerPicker.OnDateTimerPicker() {
+//            customDateTimerPicker.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            customDateTimerPicker.setType(CustomDateTimerPicker.Type.YEAR_MONTH_DAY_HOUR_MIN_SCCOND);
+            customDateTimerPicker.setCanceledOnTouchOutside(true);
+            customDateTimerPicker.getWindow().setGravity(Gravity.BOTTOM);
+            customDateTimerPicker.setOnDateTimerPicker(new CustomDateTimerPicker.OnDateTimerPicker() {
                         @Override
                         public void getDateTimePicker(int year, int month, int day, int hour, int min, int second) {
-                            backgroundAlpha(1.0f);
                         }
                     });
-            customDateTimerPicker.setOnDismissListener(()->{
-                backgroundAlpha(1.0f);
-            });
-            backgroundAlpha(0.6f);
+            customDateTimerPicker.show();
 
         }
     }

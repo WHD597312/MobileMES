@@ -1,4 +1,4 @@
-package com.supcon.whd.common.base.ui;
+package com.supcon.whd.common.base.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -26,18 +26,24 @@ public abstract class BaseFragment extends Fragment {
 
     Unbinder unbinder;
     Disposable mDisposable;
+    protected View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=View.inflate(getActivity(),getLayoutId(),null);
+        view=View.inflate(getActivity(),getLayoutId(),null);
         unbinder=ButterKnife.bind(this,view);
+        onInit();
         initView();
         initData();
         return view;
     }
 
+
     protected abstract int getLayoutId();
+    protected void onInit(){
+
+    }
     protected  void initView(){}
     protected void initData(){}
 

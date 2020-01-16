@@ -74,14 +74,13 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
                 .subscribe(o->{
                     ActivityHelper.builder(Constant.Router.MAIN).start(LoginActivity.this);
                 });
-
     }
 
     @Override
     public void doLoginFailed(String errMsg) {
         Log.i("LoginEntity",errMsg);
 //        Toast.makeText(this,errMsg,Toast.LENGTH_SHORT).show();
-        onLoadFail("登录失败!");
+        onLoadFail(errMsg);
     }
 
 //    @OnClick({R2.id.loginBtn})

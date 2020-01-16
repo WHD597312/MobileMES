@@ -20,7 +20,6 @@ public abstract class BaseControllerActivity extends BaseActivity {
     protected List<BaseController> dataControllers = new ArrayList<>();
 
 
-
     protected void initControllers() {
         Annotation[] annotations = getClass().getAnnotations();
         for (Annotation annotation:annotations){

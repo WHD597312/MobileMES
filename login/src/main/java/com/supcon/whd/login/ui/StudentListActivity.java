@@ -3,6 +3,7 @@ package com.supcon.whd.login.ui;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
 
 import com.supcon.whd.common.annotation.Presenter;
@@ -47,7 +48,6 @@ public class StudentListActivity extends BaseRefreshActivity<StudentEntity> impl
                 .setMargin(0f);
         contentView.addItemDecoration(decoration);
         contentView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
     @Override
