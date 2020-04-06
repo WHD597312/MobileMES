@@ -37,6 +37,7 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
     EditText loginName;
     @BindView(R2.id.loginPswd)
     EditText loginPswd;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_login;
@@ -70,7 +71,7 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
 //        Toast.makeText(this,loginEntity.toString(),Toast.LENGTH_SHORT).show();
         onLoadSuccess("登录成功!");
         Flowable.timer(300,TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(o->{
                     ActivityHelper.builder(Constant.Router.MAIN).start(LoginActivity.this);
                 });

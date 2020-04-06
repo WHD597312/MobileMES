@@ -1,8 +1,6 @@
 package com.supcon.whd.login.ui;
 
 import android.graphics.Color;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.supcon.whd.common.annotation.Presenter;
@@ -19,9 +17,10 @@ import com.supcon.whd.login.presenter.StudentPresenter;
 import com.supcon.whd.login.ui.adapter.StudentAdapter;
 import com.thejoyrun.router.RouterActivity;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-@RouterActivity(value = Constant.Router.STUDENTLIST)
 @Presenter(StudentPresenter.class)
+@RouterActivity(value = Constant.Router.STUDENTLIST)
 public class StudentListActivity extends BaseRefreshActivity<StudentEntity> implements ContractStudentList.View {
 
 
@@ -57,6 +56,8 @@ public class StudentListActivity extends BaseRefreshActivity<StudentEntity> impl
             presenterRouter.create(StudentListAPI.class).getStudent(pageNo);
         });
     }
+
+
 
     @Override
     public void doStudentListSuccess(StudentListEntity studentListEntity) {

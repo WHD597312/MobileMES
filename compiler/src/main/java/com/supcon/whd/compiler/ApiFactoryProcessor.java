@@ -40,9 +40,8 @@ public class ApiFactoryProcessor implements IProcessor {
         try {
             for (TypeElement element : ElementFilter.typesIn(roundEnv.getElementsAnnotatedWith(ApiFactory.class))) {
                 String packageName =  mElementsUtils.getPackageOf(element).getQualifiedName().toString();
+                String apiName=element.getSimpleName().toString();
                 ApiFactory apiFactory=element.getAnnotation(ApiFactory.class);
-
-                String interfaceName=apiFactory.interfaceName();
 
                 String CLASS_NAME = apiFactory.name();
                 String DATA_ARR_CLASS = "DataArr";
@@ -106,7 +105,7 @@ public class ApiFactoryProcessor implements IProcessor {
                                         ".retrofit.create($T.class).$L($L)" +
                                         ".compose($T.io_main())"
                                 , ClassName.get("com.supcon.whd.common.base.network", "Api")
-                                , ClassName.get(packageName,interfaceName)
+                                , ClassName.get(packageName,apiName)
                                 , e.getSimpleName().toString()
                                 , paramsString.substring(0, paramsString.length() - 1)
                                 , ClassName.get("com.supcon.whd.common.base.network", "RxSchedulers"));

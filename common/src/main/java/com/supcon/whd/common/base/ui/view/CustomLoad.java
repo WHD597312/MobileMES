@@ -3,7 +3,6 @@ package com.supcon.whd.common.base.ui.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import com.supcon.whd.common.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
-
+import androidx.annotation.NonNull;
 
 
 public class CustomLoad extends Dialog {

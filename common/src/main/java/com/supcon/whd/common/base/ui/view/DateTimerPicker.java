@@ -3,7 +3,6 @@ package com.supcon.whd.common.base.ui.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -15,6 +14,8 @@ import com.supcon.whd.common.R;
 
 import java.lang.reflect.Field;
 import java.util.Calendar;
+
+import androidx.core.content.ContextCompat;
 
 public  class DateTimerPicker extends PopupWindow {
 

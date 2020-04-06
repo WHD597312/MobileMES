@@ -3,7 +3,6 @@ package com.supcon.whd.login.ui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.donkingliang.imageselector.utils.ImageSelector;
@@ -13,6 +12,7 @@ import com.supcon.whd.login.R;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Nullable;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

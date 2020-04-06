@@ -1,5 +1,5 @@
 package com.supcon.whd.common.base.ui.adapter.viewholder;
-import android.support.v7.widget.RecyclerView;
+
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 
 import com.supcon.whd.common.base.ui.view.listener.OnItemViewClickListener;
 
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.ButterKnife;
 
 public abstract class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder {
