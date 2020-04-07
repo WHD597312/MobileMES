@@ -75,7 +75,8 @@ dependencies {
     api rootProject.ext.dependencies["arouter_api"]
     api rootProject.ext.dependencies["butterknife_api"]
 
-    //rxjava2  rxandroid retrofit2 okhttp3
+    api "com.daimajia.swipelayout:library:1.2.0@aar"
+
     api rootProject.ext.dependencies["okHttp_api"]
     api rootProject.ext.dependencies["gson_api"]
     api rootProject.ext.dependencies["retrofit_api"]
