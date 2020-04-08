@@ -11,8 +11,8 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 
-@ApiFactory(interfaceName = "NetWorkApi")
-public interface NetWorkApi {
+@ApiFactory(name = "HttpClient")
+public interface LoginAPI {
 
     /**
      * 登陆

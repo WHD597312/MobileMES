@@ -1,14 +1,15 @@
 package com.supcon.whd.login.ui;
 
 import android.graphics.Color;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.supcon.whd.common.annotation.Presenter;
 import com.supcon.whd.common.base.ui.activity.BaseRefreshActivity;
 import com.supcon.whd.common.base.ui.view.listener.IListAdapter;
+import com.supcon.whd.common.base.ui.view.listener.OnItemViewClickListener;
 import com.supcon.whd.common.constant.Constant;
 import com.supcon.whd.common.utils.MyDecoration;
 import com.supcon.whd.login.R;
@@ -20,9 +21,10 @@ import com.supcon.whd.login.presenter.StudentPresenter;
 import com.supcon.whd.login.ui.adapter.StudentAdapter;
 import com.thejoyrun.router.RouterActivity;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-@RouterActivity(value = Constant.Router.STUDENTLIST)
 @Presenter(StudentPresenter.class)
+@RouterActivity(value = Constant.Router.STUDENTLIST)
 public class StudentListActivity extends BaseRefreshActivity<StudentEntity> implements ContractStudentList.View {
 
 
@@ -48,6 +50,7 @@ public class StudentListActivity extends BaseRefreshActivity<StudentEntity> impl
                 .setMargin(0f);
         contentView.addItemDecoration(decoration);
         contentView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     @Override
@@ -56,7 +59,22 @@ public class StudentListActivity extends BaseRefreshActivity<StudentEntity> impl
         refreshController.setOnRefreshPageListener(pageNo -> {
             presenterRouter.create(StudentListAPI.class).getStudent(pageNo);
         });
+        studentAdapter.setOnItemViewClickListener(new OnItemViewClickListener() {
+            @Override
+            public void onItemViewClick(View view, int position) {
+                int id=view.getId();
+                if (id==R.id.btnUpdate){
+                    StudentEntity entity=studentAdapter.getItemEntity(position);
+                    entity.name="更新学生"+position;
+                    studentAdapter.notifyItemChanged(position);
+                }else if (id==R.id.btnDelete){
+                    studentAdapter.remove(position);
+                }
+            }
+        });
     }
+
+
 
     @Override
     public void doStudentListSuccess(StudentListEntity studentListEntity) {

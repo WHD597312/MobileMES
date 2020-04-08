@@ -53,15 +53,18 @@ dependencies {
     // 在项目中的libs中的所有的.jar结尾的文件，都是依赖
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //把implementation 用api代替,它是对外部公开的, 所有其他的module就不需要添加该依赖
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    api rootProject.ext.dependencies["appcompat_v7"]
-    api rootProject.ext.dependencies["constraint_layout"]
-    api rootProject.ext.dependencies["recyclerview-v7"]
-    api rootProject.ext.dependencies["support-v4"]
-    api rootProject.ext.dependencies["design"]
-    api rootProject.ext.dependencies["support_annotations"]
+//    api rootProject.ext.dependencies["appcompat_v7"]
+//    api rootProject.ext.dependencies["constraint_layout"]
+//    api rootProject.ext.dependencies["recyclerview-v7"]
+//    api rootProject.ext.dependencies["support-v4"]
+//    api rootProject.ext.dependencies["design"]
+//    api rootProject.ext.dependencies["support_annotations"]
 //    api rootProject.ext.dependencies["kotlin-api"]
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
 
     //MultiDex分包方法
     api rootProject.ext.dependencies["multidex"]
@@ -72,7 +75,8 @@ dependencies {
     api rootProject.ext.dependencies["arouter_api"]
     api rootProject.ext.dependencies["butterknife_api"]
 
-    //rxjava2  rxandroid retrofit2 okhttp3
+    api "com.daimajia.swipelayout:library:1.2.0@aar"
+
     api rootProject.ext.dependencies["okHttp_api"]
     api rootProject.ext.dependencies["gson_api"]
     api rootProject.ext.dependencies["retrofit_api"]
@@ -88,8 +92,6 @@ dependencies {
     api 'com.github.donkingliang:ImageSelector:1.6.8'
     api 'com.weigan:loopView:0.1.2'
     api project(':annotation')
-    api 'com.daimajia.swipelayout:library:1.2.0@aar'
-
 
 //    annotationProcessor  "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
 }

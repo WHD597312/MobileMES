@@ -1,10 +1,9 @@
 package com.supcon.whd.common.base.ui.activity;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.text.TextUtils;
 
 import android.view.View;
@@ -19,6 +18,7 @@ import com.supcon.whd.common.utils.ScreenUtil;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Flowable;

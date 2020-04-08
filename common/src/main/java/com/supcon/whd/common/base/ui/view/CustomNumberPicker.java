@@ -3,7 +3,6 @@ package com.supcon.whd.common.base.ui.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import java.lang.reflect.Field;
+
+import androidx.core.content.ContextCompat;
 
 public class CustomNumberPicker extends NumberPicker {
     private Context context;

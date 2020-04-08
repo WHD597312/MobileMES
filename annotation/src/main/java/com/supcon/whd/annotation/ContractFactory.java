@@ -8,5 +8,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)
 public @interface ContractFactory {
-    String value();
+//    String value();
+    Class<?> []entities();
 }

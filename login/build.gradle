@@ -56,7 +56,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
     implementation project(':middle')
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+//    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     annotationProcessor "com.github.joyrun.ActivityRouter:router-compiler:$rootProject.ext.versions.arouterCompilerVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
     annotationProcessor project(':compiler')
