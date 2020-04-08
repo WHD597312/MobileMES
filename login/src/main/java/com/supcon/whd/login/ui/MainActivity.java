@@ -74,6 +74,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         StatusBarUtils.setWindowStatusBarColor(this,R.color.colorAccent);
+        setSwipeBackEnable(false);
         adapter=new WorkAdapter(this,list);
         contentView.setLayoutManager(new GridLayoutManager(this,3));
         contentView.setAdapter(adapter);

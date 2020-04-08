@@ -4,22 +4,19 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
 
+import android.view.View;
+
+import android.widget.ImageView;
 import com.supcon.whd.common.R;
 import com.weigan.loopview.LoopView;
 import com.weigan.loopview.OnItemSelectedListener;
-
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 
 public class CustomDateTimerPicker extends Dialog {
@@ -34,7 +31,7 @@ public class CustomDateTimerPicker extends Dialog {
     private int dayIndex=0;
 
     public CustomDateTimerPicker(@NonNull Context context) {
-        super(context, R.style.MyDialog2);
+        super(context, R.style.MyDialog);
         this.context=context;
     }
 

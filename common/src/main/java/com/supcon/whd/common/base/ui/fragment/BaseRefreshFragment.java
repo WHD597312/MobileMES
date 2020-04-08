@@ -1,6 +1,6 @@
 package com.supcon.whd.common.base.ui.fragment;
 
-import android.support.v7.widget.RecyclerView;
+
 
 import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 import com.supcon.whd.common.R;
@@ -9,6 +9,8 @@ import com.supcon.whd.common.base.ui.view.MyHeadRefreshView;
 import com.supcon.whd.common.base.ui.view.MyLoadMoreView;
 import com.supcon.whd.common.base.ui.view.listener.IListAdapter;
 import com.supcon.whd.common.controller.RefreshController;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class BaseRefreshFragment<T> extends BasePresenterFragment {
     protected PullToRefreshLayout refreshOperate;

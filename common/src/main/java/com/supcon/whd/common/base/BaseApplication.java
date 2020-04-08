@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.multidex.MultiDex;
+
 import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.WebView;
@@ -18,6 +17,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
+
+import androidx.annotation.Nullable;
+import androidx.multidex.MultiDex;
 
 public class BaseApplication  extends Application {
     public static String baseUrl="http://192.168.90.147:8080/";
