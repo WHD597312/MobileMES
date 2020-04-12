@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.supcon.whd.common.annotation.Presenter;
 import com.supcon.whd.common.base.ui.activity.BasePresenterActivity;
 import com.supcon.whd.common.constant.Constant;
@@ -16,9 +18,6 @@ import com.supcon.whd.login.model.api.LoginAPI;
 import com.supcon.whd.login.model.bean.LoginEntity;
 import com.supcon.whd.login.model.contract.ContractLogin;
 import com.supcon.whd.login.presenter.LoginPresenter;
-import com.thejoyrun.router.ActivityHelper;
-import com.thejoyrun.router.RouterActivity;
-
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -27,7 +26,7 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
-@RouterActivity(Constant.Router.LOGIN)
+@Route(path = Constant.Router.LOGIN)
 @Presenter(value = {
         LoginPresenter.class
 })
@@ -53,8 +52,8 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
     public void onClick(View view){
         int id=view.getId();
         if (id==R.id.loginBtn){
-            String username=loginName.getText().toString();
-            String password=loginPswd.getText().toString();
+            String username=loginName.getText().toString().trim();
+            String password=loginPswd.getText().toString().trim();
             onLoading("正在登录...");
             Flowable.timer(300, TimeUnit.MILLISECONDS)
                     .subscribe(s->{
@@ -73,7 +72,11 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
         Flowable.timer(300,TimeUnit.MILLISECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(o->{
-                    ActivityHelper.builder(Constant.Router.MAIN).start(LoginActivity.this);
+                    ARouter.getInstance()
+                            .build(Constant.Router.MAIN)
+                            .withString("username","whd")
+                            .withString("password","123")
+                            .navigation();
                 });
     }
 

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.daimajia.swipe.SwipeLayout;
 import com.supcon.whd.common.annotation.Presenter;
 import com.supcon.whd.common.base.ui.activity.BaseRefreshActivity;
@@ -19,12 +20,12 @@ import com.supcon.whd.login.model.bean.StudentListEntity;
 import com.supcon.whd.login.model.contract.ContractStudentList;
 import com.supcon.whd.login.presenter.StudentPresenter;
 import com.supcon.whd.login.ui.adapter.StudentAdapter;
-import com.thejoyrun.router.RouterActivity;
+
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 @Presenter(StudentPresenter.class)
-@RouterActivity(value = Constant.Router.STUDENTLIST)
+@Route(path = Constant.Router.STUDENTLIST)
 public class StudentListActivity extends BaseRefreshActivity<StudentEntity> implements ContractStudentList.View {
 
 

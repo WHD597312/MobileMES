@@ -9,9 +9,10 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.supcon.whd.common.utils.DensityUtils;
 import com.supcon.whd.common.utils.ScreenUtil;
-import com.thejoyrun.router.Router;
+
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +29,7 @@ public class BaseApplication  extends Application {
     public static BaseApplication mApp;
     private Set<Class<? extends View>> mProblemViewClassSet = new HashSet<>();
     private static Context mContext;
+    public boolean isDebugARouter=true;
 
     public static Context getContext(){
         return mContext;
@@ -35,12 +37,17 @@ public class BaseApplication  extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (isDebugARouter){
+            ARouter.openLog();;
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
         mContext=this;
         mApp=this;
         store = new Stack<>();
         registerActivityLifecycleCallbacks(new SwitchBackgroundCallbacks());
         MultiDex.install(this);
-        Router.init("MobileMES");
+
         DensityUtils.setDensity(this);
     }
     private class SwitchBackgroundCallbacks implements ActivityLifecycleCallbacks {

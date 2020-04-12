@@ -7,8 +7,7 @@ import com.supcon.whd.login.model.contract.ContractLogin;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+
 
 public class LoginPresenter extends ContractLogin.Presenter {
     @Override

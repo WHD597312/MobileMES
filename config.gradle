@@ -27,8 +27,7 @@ ext {
             annotationsVersion      : "28.0.0",
 
             multidexVersion         : "1.0.3",
-            arouterApiVersion       : "0.8.4",
-            arouterCompilerVersion  : "0.8.4",
+            arouterApiVersion       : "1.4.1",
 
             okHttpVersion           : '3.9.0',
             gsonVersion             : '2.8.1',
@@ -64,8 +63,7 @@ ext {
                     "multidex-instrumentation"            : "com.android.support:multidex-instrumentation:${versions["multidexVersion"]}",
 
                     //路由
-                    "arouter_api"         : "com.github.joyrun.ActivityRouter:router:${versions["arouterApiVersion"]}",
-                    "arouter_compiler"    : "com.github.joyrun.ActivityRouter:router-compiler:${versions["arouterCompilerVersion"]}",
+                    "arouter_api"         : "com.alibaba:arouter-api:${versions["arouterApiVersion"]}",
 
                    //网络请求
                   "loging_interceptor_api" :"com.squareup.okhttp3:logging-interceptor:${versions["logingInterceptorVersion"]}",

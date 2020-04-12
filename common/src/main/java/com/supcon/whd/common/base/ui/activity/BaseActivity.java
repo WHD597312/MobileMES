@@ -8,6 +8,8 @@ import android.text.TextUtils;
 
 import android.view.View;
 import android.view.WindowManager;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.supcon.whd.common.base.ui.view.CustomLoad;
 import com.supcon.whd.common.swipelayout.SwipeBackActivityBase;
 import com.supcon.whd.common.swipelayout.SwipeBackActivityHelper;
@@ -39,6 +41,7 @@ public abstract class BaseActivity  extends AppCompatActivity implements SwipeBa
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        ARouter.getInstance().inject(this);
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
         this.context=this;

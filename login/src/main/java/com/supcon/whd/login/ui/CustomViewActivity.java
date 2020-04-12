@@ -5,6 +5,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.supcon.whd.common.base.ui.activity.BaseActivity;
 import com.supcon.whd.common.base.ui.view.CustomDatePicker;
 import com.supcon.whd.common.base.ui.view.CustomDateTimerPicker;
@@ -14,12 +15,12 @@ import com.supcon.whd.common.utils.DensityUtils;
 import com.supcon.whd.common.utils.ScreenUtil;
 import com.supcon.whd.login.R;
 import com.supcon.whd.login.R2;
-import com.thejoyrun.router.RouterActivity;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-@RouterActivity(Constant.Router.CUSTOM)
+@Route(path = Constant.Router.CUSTOM)
 public class CustomViewActivity extends BaseActivity {
     @BindView(R2.id.btnDatePicker)
     Button btnDatePicker;

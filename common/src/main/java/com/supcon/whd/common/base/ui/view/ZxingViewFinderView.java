@@ -15,10 +15,12 @@ import com.journeyapps.barcodescanner.ViewfinderView;
 import com.supcon.whd.common.R;
 
 
-import org.jetbrains.annotations.Nullable;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 public class ZxingViewFinderView extends ViewfinderView {
     private int scannerBoundColor;

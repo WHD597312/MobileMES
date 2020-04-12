@@ -5,6 +5,7 @@ package com.supcon.whd.login.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.supcon.whd.common.base.ui.activity.BaseActivity;
 import com.supcon.whd.common.base.ui.view.listener.OnItemViewClickListener;
@@ -23,8 +27,7 @@ import com.supcon.whd.login.R2;
 import com.supcon.whd.login.model.bean.WorkEntity;
 import com.supcon.whd.login.ui.adapter.WorkAdapter;
 import com.supcon.whd.login.ui.fragment.MineFragment;
-import com.thejoyrun.router.ActivityHelper;
-import com.thejoyrun.router.RouterActivity;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-@RouterActivity(value = Constant.Router.MAIN)
+@Route(path = Constant.Router.MAIN)
 public class MainActivity extends BaseActivity {
 
     @BindView(R2.id.contentView)
@@ -56,6 +59,12 @@ public class MainActivity extends BaseActivity {
     List<WorkEntity> list=new ArrayList<>();
     MineFragment mineFragment;
     FragmentManager fragmentManager;
+
+    @Autowired(name = "username")
+    String username;
+    @Autowired(name = "password")
+    String password;
+
 
 
     @Override
@@ -85,6 +94,7 @@ public class MainActivity extends BaseActivity {
         getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container,mineFragment).commit();
+        Log.i("params","username="+username+",password="+password);
         drawLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View view, float v) {
@@ -118,9 +128,9 @@ public class MainActivity extends BaseActivity {
             public void onItemViewClick(View view, int position) {
                 WorkEntity workEntity=adapter.getItemEntity(position);
                 if (Constant.Router.STUDENTLIST.equals(workEntity.router)){
-                    ActivityHelper.builder(Constant.Router.STUDENTLIST).start(MainActivity.this);
+                    ARouter.getInstance().build(Constant.Router.STUDENTLIST).navigation();
                 }else if (Constant.Router.CUSTOM.equals(workEntity.router)){
-                    ActivityHelper.builder(Constant.Router.CUSTOM).start(MainActivity.this);
+                    ARouter.getInstance().build(Constant.Router.CUSTOM).navigation();
                 }else if (Constant.Router.QRSCAN.equals(workEntity.router)) {
                     new IntentIntegrator(MainActivity.this)
                             .setOrientationLocked(true)
@@ -144,6 +154,7 @@ public class MainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (data!=null && requestCode==100){
             String scanResult=data.getStringExtra("SCAN_RESULT");
+            Log.i("scanResult",scanResult);
             Toast.makeText(this,scanResult,Toast.LENGTH_LONG).show();
         }
     }

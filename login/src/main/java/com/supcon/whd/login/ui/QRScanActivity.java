@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
 import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class QRScanActivity extends BaseScanActivity {
