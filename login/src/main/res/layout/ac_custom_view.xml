@@ -17,72 +17,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        <com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/btnSwitch"
-            style="@style/SwitchButtonStyle"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="#E0E0E0"
 
-            />
-        <com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/sb_default_measure_4"
-            style="@style/SwitchButtonStyle"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="#E0E0E0"
-            app:kswThumbMargin="-5dp"
-            />
-        <com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/sb_default_measure_7"
-            style="@style/SwitchButtonStyle"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="#E0E0E0"
-            app:kswTextExtra="10dp"
-            app:kswTextOff="OFF"
-            app:kswTextOn="ON"
-            app:kswThumbMargin="-5dp"
-            />
 
         <com.kyleduo.switchbutton.SwitchButton
             android:id="@+id/sb_tint_color_2"
             android:layout_margin="@dimen/dp_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            style="@style/SwitchButtonStyle"
-            app:kswBackDrawable="@drawable/flyme_back_drawable"
-
-            app:kswBackColor="#545454"
-            app:kswThumbRangeRatio="2.2"
-            app:kswTintColor="#00FF7F" />
-        <com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/sb_tint_color_1"
-            style="@style/SwitchButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:checked="true"
-            app:kswTintColor="#FF5449"/>
-        <com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/sb_tint_color_0"
-            style="@style/SwitchButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            app:kswBackDrawable="@drawable/flyme_back_drawable"
-            app:kswTintColor="#B13254"/>
-        <com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/sb_custom_flyme"
-            style="@style/SwitchButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:kswBackDrawable="@drawable/flyme_back_drawable"
-            app:kswThumbDrawable="@drawable/flyme_thumb_drawable"
-            app:kswThumbHeight="@dimen/dp_25"
-            app:kswThumbRangeRatio="5"
-            app:kswThumbWidth="16dp"/>
+            app:kswBackColor="#E0E0E0"
+            app:kswThumbRangeRatio="2.0"
+            app:kswThumbHeight="@dimen/dp_30"
+            app:kswThumbWidth="@dimen/dp_30"
+            app:kswTintColor="#00ff00" />
     </LinearLayout>
 
     <View
