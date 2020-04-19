@@ -43,7 +43,6 @@ public abstract class BasePresenterActivity extends BaseActivity implements IBas
                         }
                     }
                 }
-
             }
         }
     }
@@ -59,12 +58,10 @@ public abstract class BasePresenterActivity extends BaseActivity implements IBas
         super.onDestroy();
 
         for (BasePresenter presenter : mPresenters) {
-
             if (presenter != null) {
                 presenter.detachView();
+                presenterRouter.unRegister(presenter);
             }
-
         }
-
     }
 }
