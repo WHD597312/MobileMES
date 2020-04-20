@@ -91,8 +91,9 @@ dependencies {
     api rootProject.ext.dependencies["zxing_code_api"]
     api rootProject.ext.dependencies["zxing-android-embedded_api"]
     api 'com.github.donkingliang:ImageSelector:1.6.8'
-    api 'com.kyleduo.switchbutton:library:2.0.0'
+    api 'com.github.zcweng:switch-button:0.0.3@aar'
     api 'com.weigan:loopView:0.1.2'
+    api 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     api 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
     api project(':annotation')
 

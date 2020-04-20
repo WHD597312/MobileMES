@@ -1,11 +1,14 @@
 package com.supcon.whd.login.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.suke.widget.SwitchButton;
 import com.supcon.whd.common.base.ui.activity.BaseActivity;
 import com.supcon.whd.common.base.ui.view.CustomDatePicker;
 import com.supcon.whd.common.base.ui.view.CustomDateTimerPicker;
@@ -17,6 +20,8 @@ import com.supcon.whd.login.R;
 import com.supcon.whd.login.R2;
 
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -24,6 +29,8 @@ import butterknife.OnClick;
 public class CustomViewActivity extends BaseActivity {
     @BindView(R2.id.btnDatePicker)
     Button btnDatePicker;
+    @BindView(R2.id.switch_button)
+    SwitchButton switch_button;
 
 
     @Override
@@ -38,6 +45,18 @@ public class CustomViewActivity extends BaseActivity {
 
     @Override
     public void onInit() {
+
+    }
+
+    @Override
+    protected void onListener() {
+        super.onListener();
+        switch_button.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                Log.i("CheckedChangeListener","-->"+isChecked);
+            }
+        });
 
     }
 
@@ -64,6 +83,6 @@ public class CustomViewActivity extends BaseActivity {
     }
     @Override
     public void initView() {
-
+        setSwipeBackEnable(false);
     }
 }
