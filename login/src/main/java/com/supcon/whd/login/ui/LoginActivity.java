@@ -8,10 +8,10 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.leaf.library.StatusBarUtil;
 import com.supcon.whd.common.annotation.Presenter;
 import com.supcon.whd.common.base.ui.activity.BasePresenterActivity;
 import com.supcon.whd.common.constant.Constant;
-import com.supcon.whd.common.utils.StatusBarUtils;
 import com.supcon.whd.login.R;
 import com.supcon.whd.login.R2;
 import com.supcon.whd.login.model.api.LoginAPI;
@@ -45,7 +45,8 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
 
     @Override
     public void initView() {
-        StatusBarUtils.setWindowStatusBarColor(this,R.color.colorAccent);
+//        StatusBarUtils.setWindowStatusBarColor(this,R.color.colorAccent);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.blue));
     }
 
     @OnClick({R2.id.loginBtn})

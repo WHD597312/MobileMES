@@ -18,10 +18,10 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.leaf.library.StatusBarUtil;
 import com.supcon.whd.common.base.ui.activity.BaseActivity;
 import com.supcon.whd.common.base.ui.view.listener.OnItemViewClickListener;
 import com.supcon.whd.common.constant.Constant;
-import com.supcon.whd.common.utils.StatusBarUtils;
 import com.supcon.whd.login.R;
 import com.supcon.whd.login.R2;
 import com.supcon.whd.login.model.bean.WorkEntity;
@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
     DisplayMetrics outMetrics;
     @Override
     public void initView() {
-        StatusBarUtils.setWindowStatusBarColor(this,R.color.colorAccent);
+        StatusBarUtil.setColor(this,getResources().getColor(R.color.blue));
         setSwipeBackEnable(false);
         adapter=new WorkAdapter(this,list);
         contentView.setLayoutManager(new GridLayoutManager(this,3));

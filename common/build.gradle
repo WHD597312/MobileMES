@@ -93,6 +93,7 @@ dependencies {
     api 'com.github.donkingliang:ImageSelector:1.6.8'
     api 'com.kyleduo.switchbutton:library:2.0.0'
     api 'com.weigan:loopView:0.1.2'
+    api 'com.github.Ye-Miao:StatusBarUtil:1.7.5'
     api project(':annotation')
 
 //    annotationProcessor  "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
