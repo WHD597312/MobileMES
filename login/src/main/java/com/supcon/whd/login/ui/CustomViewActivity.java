@@ -5,9 +5,11 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -106,6 +108,7 @@ public class CustomViewActivity extends BaseActivity {
 //            DateTimerPicker dateTimerPicker=new DateTimerPicker(this,contentView);
 //            dateTimerPicker.initPopTimer(btnDatePicker,R.color.white);
             CustomDateTimerPicker customDateTimerPicker=new CustomDateTimerPicker(this);
+
 //            customDateTimerPicker.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             customDateTimerPicker.setType(CustomDateTimerPicker.Type.YEAR_MONTH_DAY_HOUR_MIN_SCCOND);
             customDateTimerPicker.setCanceledOnTouchOutside(true);
@@ -116,7 +119,11 @@ public class CustomViewActivity extends BaseActivity {
                         }
                     });
             customDateTimerPicker.show();
-
+            WindowManager windowManager = getWindowManager();
+            Display display = windowManager.getDefaultDisplay();
+            WindowManager.LayoutParams lp = customDateTimerPicker.getWindow().getAttributes();
+            lp.width = (int)(display.getWidth()); //设置宽度
+            customDateTimerPicker.getWindow().setAttributes(lp);
         }
     }
     @Override
