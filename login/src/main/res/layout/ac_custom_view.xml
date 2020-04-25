@@ -31,6 +31,17 @@
             app:sb_shadow_effect="false"
             app:sb_effect_duration="1"
             />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:id="@+id/customEditTv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:hint="请输入数值"
+            android:inputType="number|numberDecimal"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_5"
+            />
     </LinearLayout>
 
     <View

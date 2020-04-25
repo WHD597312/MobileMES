@@ -1,13 +1,19 @@
 package com.supcon.whd.login.ui;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.suke.widget.SwitchButton;
 import com.supcon.whd.common.base.ui.activity.BaseActivity;
 import com.supcon.whd.common.base.ui.view.CustomDatePicker;
@@ -16,14 +22,17 @@ import com.supcon.whd.common.base.ui.view.DateTimerPicker;
 import com.supcon.whd.common.constant.Constant;
 import com.supcon.whd.common.utils.DensityUtils;
 import com.supcon.whd.common.utils.ScreenUtil;
+import com.supcon.whd.common.utils.ToastUtils;
 import com.supcon.whd.login.R;
 import com.supcon.whd.login.R2;
 
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.appcompat.widget.AppCompatEditText;
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 @Route(path = Constant.Router.CUSTOM)
 public class CustomViewActivity extends BaseActivity {
@@ -31,6 +40,8 @@ public class CustomViewActivity extends BaseActivity {
     Button btnDatePicker;
     @BindView(R2.id.switch_button)
     SwitchButton switch_button;
+    @BindView(R2.id.customEditTv)
+    AppCompatEditText compatEditText;
 
 
     @Override
@@ -58,7 +69,34 @@ public class CustomViewActivity extends BaseActivity {
             }
         });
 
+       RxTextView.afterTextChangeEvents(compatEditText)
+               .skipInitialValue()
+               .debounce(300,TimeUnit.MILLISECONDS)
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribe(textViewAfterTextChangeEvent -> {
+                   String s=textViewAfterTextChangeEvent.editable().toString();
+                   if (!TextUtils.isEmpty(s)){
+                       String rango=String.format("输入的数值范围是%s-%s",min,max);
+                       float value=Float.valueOf(s);
+                       if (value<min){
+                           value=min;
+                            ToastUtils.showShort(context,rango,Gravity.CENTER);
+                           s=String.format("%.2f",value);
+                            compatEditText.setText(s);
+                       }else if (value>max){
+                           value=max;
+                            ToastUtils.showShort(context,rango,Gravity.CENTER);
+                           s=String.format("%.2f",value);
+                            compatEditText.setText(s);
+                       }
+                       Log.i("TextChange",s);
+                        compatEditText.setSelection(s.length());
+                   }
+               });
     }
+    private Float min=0F;
+    private Float max=100F;
+
 
     @OnClick({R2.id.btnDatePicker})
     public void onClick(View view){

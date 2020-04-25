@@ -133,4 +133,5 @@ public class Util {
         }
         return displayMetrics.widthPixels;
     }
+
 }
