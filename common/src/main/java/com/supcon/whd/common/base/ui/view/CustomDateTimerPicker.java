@@ -44,6 +44,7 @@ public class CustomDateTimerPicker extends Dialog {
         loopDay = findViewById(R.id.loopDay);
 
         loopHour = findViewById(R.id.loopHour);
+
         loopMin = findViewById(R.id.loopMin);
         loopSecond = findViewById(R.id.loopSecond);
     }
