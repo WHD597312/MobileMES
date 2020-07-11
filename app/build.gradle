@@ -5,10 +5,11 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('D:/zgs-work/MobileMES/app/mobile.jks')
-            storePassword '123456'
+            storeFile file('F:/MobileMES/app/mobile.jks')
+            storePassword '654321'
             keyAlias = 'mobile'
             keyPassword '123456'
+            keyAlias 'mobile'
         }
     }
     compileSdkVersion rootProject.ext.versions.compileSdkVersion
@@ -33,7 +34,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [moduleName :project.getName() ]
-                includeCompileClasspath true
+//                includeCompileClasspath true
             }
         }
     }
@@ -60,7 +61,7 @@ android {
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //公用依赖包
     implementation project(':common')
     if (!Boolean.valueOf(rootProject.ext.isModule)) {
@@ -70,8 +71,6 @@ dependencies {
     }
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
     annotationProcessor project(':compiler')
-
-
 }
 static def releaseTime() {
     return new SimpleDateFormat("yyyyMMdd").format(new Date(System.currentTimeMillis()))
