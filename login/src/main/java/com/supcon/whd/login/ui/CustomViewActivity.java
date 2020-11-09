@@ -11,9 +11,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.jakewharton.rxbinding2.InitialValueObservable;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.suke.widget.SwitchButton;
@@ -35,6 +37,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
 @Route(path = Constant.Router.CUSTOM)
 public class CustomViewActivity extends BaseActivity {
@@ -44,7 +47,10 @@ public class CustomViewActivity extends BaseActivity {
     SwitchButton switch_button;
     @BindView(R2.id.customEditTv)
     AppCompatEditText compatEditText;
-
+    @BindView(R2.id.etNum)
+    EditText etNum;
+    @BindView(R2.id.etNum2)
+    EditText etNum2;
 
     @Override
     protected String getOrientation() {
@@ -61,6 +67,7 @@ public class CustomViewActivity extends BaseActivity {
 
     }
 
+    Disposable disposable;
     @Override
     protected void onListener() {
         super.onListener();
@@ -70,6 +77,44 @@ public class CustomViewActivity extends BaseActivity {
                 Log.i("CheckedChangeListener","-->"+isChecked);
             }
         });
+
+
+
+
+        etNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+                if (b){
+                    disposable=RxTextView.textChanges(etNum)
+                            .skipInitialValue()
+                            .map(CharSequence::toString)
+                            .subscribe(s -> {
+                                etNum2.setText(s);
+                            });
+                }else if (disposable!=null){
+                       disposable.dispose();
+                }
+            }
+        });
+        etNum2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    disposable=RxTextView.textChanges(etNum2)
+                            .skipInitialValue()
+                            .map(CharSequence::toString)
+                            .subscribe(s -> {
+                                int a=Integer.valueOf(s);
+                                int c=a+2;
+                                etNum.setText(c+"");
+                            });
+                }else if (disposable!=null){
+                    disposable.dispose();
+                }
+            }
+        });
+
 
        RxTextView.afterTextChangeEvents(compatEditText)
                .skipInitialValue()

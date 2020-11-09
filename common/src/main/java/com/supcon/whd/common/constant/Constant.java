@@ -7,6 +7,7 @@ public interface Constant {
         String STUDENTLIST="/mes/Student";
         String QRSCAN="/mes/QRSsan";
         String CUSTOM="/mes/Custom";
+        String IMAGEPICKER="/mes/imagePicker";
     }
 
 }

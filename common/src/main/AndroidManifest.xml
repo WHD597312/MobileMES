@@ -1,6 +1,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.supcon.whd.common" >
 
+
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 储存卡的读写权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 调用相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application android:name=".base.BaseApplication">
+        <!-- 图片选择Activity -->
+        <activity android:name="com.donkingliang.imageselector.ImageSelectorActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <!--图片预览Activity-->
+        <activity android:name="com.donkingliang.imageselector.PreviewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <!-- Android 7.0 文件共享配置，必须配置 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.supcon.whd.mes.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+
 </manifest>

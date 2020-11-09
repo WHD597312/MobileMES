@@ -84,6 +84,9 @@ public abstract class BaseActivity  extends AppCompatActivity implements SwipeBa
 
     }
 
+    public int getBaseColor(int color){
+        return getResources().getColor(color);
+    }
     protected int getDimen(int dimen){
         return (int) getResources().getDimension(dimen);
     }

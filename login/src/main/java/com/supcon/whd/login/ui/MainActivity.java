@@ -77,6 +77,7 @@ public class MainActivity extends BaseActivity {
         list.add(new WorkEntity(R.drawable.ic_list,"列表",Constant.Router.STUDENTLIST));
         list.add(new WorkEntity(R.drawable.ic_qrcode,"二维码",Constant.Router.QRSCAN));
         list.add(new WorkEntity(R.drawable.ic_custom,"自定义",Constant.Router.CUSTOM));
+        list.add(new WorkEntity(R.drawable.ic_custom,"图片选择",Constant.Router.IMAGEPICKER));
     }
 
     DisplayMetrics outMetrics;
@@ -137,6 +138,8 @@ public class MainActivity extends BaseActivity {
                             .setCaptureActivity(QRScanActivity.class)
                             .setRequestCode(100)
                             .initiateScan();
+                }else if (Constant.Router.IMAGEPICKER.equals(workEntity.router)){
+                    ARouter.getInstance().build(Constant.Router.IMAGEPICKER).navigation();
                 }
             }
         });
