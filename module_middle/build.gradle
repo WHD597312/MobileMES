@@ -27,6 +27,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //MultiDex分包方法
         multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
 
 
     }
@@ -46,7 +51,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':common')
+    implementation project(':module_common')
     annotationProcessor  "com.jakewharton:butterknife-compiler:$rootProject.ext.versions.butterknifeCompilerVersion"
 }
 

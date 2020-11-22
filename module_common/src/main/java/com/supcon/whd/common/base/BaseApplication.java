@@ -38,7 +38,7 @@ public class BaseApplication  extends Application {
     public void onCreate() {
         super.onCreate();
         if (isDebugARouter){
-            ARouter.openLog();;
+            ARouter.openLog();
             ARouter.openDebug();
         }
         ARouter.init(this);

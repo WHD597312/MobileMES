@@ -150,7 +150,9 @@ public abstract class BaseActivity  extends AppCompatActivity implements SwipeBa
     }
 
     public abstract int getLayoutId();
-    public abstract void onInit();
+    public  void onInit(){
+        ARouter.getInstance().inject(this);
+    }
     protected  void initView(){
 
     }

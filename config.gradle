@@ -45,8 +45,8 @@ ext {
             glideVersion  : "4.6.1",
             pulltorefreshVersion : "1.0.3",
             zxingCoreVersion :"3.3.0",
-            zxingAndroidEmbeddedVersion:"3.6.0"
-
+            zxingAndroidEmbeddedVersion:"3.6.0",
+            arouterVersion:"1.3.1"
 
 
 
@@ -89,7 +89,8 @@ ext {
                     "pulltorefresh_api" :"com.jwenfeng.pulltorefresh:library:${versions['pulltorefreshVersion']}",
                     //zxing二维码扫描
                     "zxing_code_api" :"com.google.zxing:core:${versions['zxingCoreVersion']}",
-                    "zxing-android-embedded_api":"com.journeyapps:zxing-android-embedded:${versions['zxingAndroidEmbeddedVersion']}"
+                    "zxing-android-embedded_api":"com.journeyapps:zxing-android-embedded:${versions['zxingAndroidEmbeddedVersion']}",
+                    "router-api":"com.alibaba:arouter-api:${versions['arouterVersion']}"
 
 
 

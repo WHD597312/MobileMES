@@ -5,6 +5,7 @@ buildscript {
     ext.ProductCode = "1.00"
     ext.LIMSCode = "00"
     ext.MobileCode = "01"  //和versionCode 保持一致，不足一位加“0”补足
+    ext.isModule=false
     repositories {
         google()
         jcenter()
