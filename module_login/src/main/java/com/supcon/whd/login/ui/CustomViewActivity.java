@@ -30,11 +30,15 @@ import com.supcon.whd.common.utils.ScreenUtil;
 import com.supcon.whd.common.utils.ToastUtils;
 import com.supcon.whd.login.R;
 import com.supcon.whd.login.R2;
+import com.supcon.whd.login.model.TextViewModel;
 
 
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,6 +57,10 @@ public class CustomViewActivity extends BaseActivity {
     @BindView(R2.id.etNum2)
     EditText etNum2;
 
+    @BindView(R2.id.testViewModel)
+    TextView testViewModel;
+
+
     @Override
     protected String getOrientation() {
         return ScreenUtil.HEIGHT;
@@ -63,15 +71,24 @@ public class CustomViewActivity extends BaseActivity {
         return R.layout.ac_custom_view;
     }
 
+    TextViewModel viewModel;
+    MutableLiveData<String> keyEvent;
     @Override
     public void onInit() {
-
+        viewModel=new ViewModelProvider(this,new TextViewModel.Factory("11111111")).get(TextViewModel.class);
+        keyEvent=viewModel.getNameEvent();
     }
 
     Disposable disposable;
     @Override
     protected void onListener() {
         super.onListener();
+        keyEvent.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                testViewModel.setText(s);
+            }
+        });
         switch_button.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
@@ -91,6 +108,7 @@ public class CustomViewActivity extends BaseActivity {
                             .skipInitialValue()
                             .map(CharSequence::toString)
                             .subscribe(s -> {
+                                keyEvent.setValue(s);
                                 etNum2.setText(s);
                             });
                 }else if (disposable!=null){

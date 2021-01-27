@@ -14,12 +14,16 @@ import com.supcon.whd.common.base.ui.activity.BasePresenterActivity;
 import com.supcon.whd.common.constant.Constant;
 import com.supcon.whd.login.R;
 import com.supcon.whd.login.R2;
+import com.supcon.whd.login.listener.MyListener;
 import com.supcon.whd.login.model.api.LoginAPI;
 import com.supcon.whd.login.model.bean.LoginEntity;
 import com.supcon.whd.login.model.contract.ContractLogin;
 import com.supcon.whd.login.presenter.LoginPresenter;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Flowable;
@@ -36,11 +40,20 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
     EditText loginName;
     @BindView(R2.id.loginPswd)
     EditText loginPswd;
+    MyListener listener;
+
+    @Override
+    public void onInit() {
+        super.onInit();
+        listener=new MyListener();
+        getLifecycle().addObserver(listener);
+    }
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_login;
     }
+
 
 
     @Override
@@ -97,4 +110,7 @@ public class LoginActivity extends BasePresenterActivity implements ContractLogi
 //           Toast.makeText(this,name+"--"+pswd,Toast.LENGTH_SHORT).show();
 //       }
 //    }
+
+
+
 }

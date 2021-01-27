@@ -47,74 +47,21 @@ public class CustomDateTimerPicker extends Dialog {
 
         loopMin = findViewById(R.id.loopMin);
         loopSecond = findViewById(R.id.loopSecond);
+        setType(type);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         initPopTimer();
+
     }
 
     public void initPopTimer() {
         if (this != null && this.isShowing())
             return;
-        if ("yyyy-MM-dd HH:mm:ss".equals(type)) {
-            getYears();
-            getMonths();
-            getLeapYearFeb();
-            getNonleapYearFeb();
-            getDays();
-            getDays2();
-            getHours();
-            getMins();
-            getSeconds();
-        }
         ImageView imgEnsure = findViewById(R.id.imgEnsure);
         ImageView imgCancel = findViewById(R.id.imgCancel);
-
-        if (needYear) {
-            loopYear.setItems(years);
-            loopYear.setItemsVisibleCount(7);
-            loopYear.setCenterTextColor(Color.parseColor("#ff37d39e"));
-            loopYear.setTextSize(18);
-            loopYear.setLineSpacingMultiplier(2.5f);
-        }
-        if (needMonth) {
-            loopMonth.setItems(months);
-            loopMonth.setItemsVisibleCount(7);
-            loopMonth.setCenterTextColor(Color.parseColor("#ff37d39e"));
-            loopMonth.setTextSize(18);
-            loopMonth.setLineSpacingMultiplier(2.5f);
-
-            if (month < 10) {
-                loopMonth.setCurrentPosition(months.indexOf("0" + month));
-            } else {
-                loopMonth.setCurrentPosition(months.indexOf("" + month));
-            }
-        }
-        if (needHour) {
-            loopHour.setItems(hours);
-            loopHour.setItemsVisibleCount(7);
-            loopHour.setCenterTextColor(Color.parseColor("#ff37d39e"));
-            loopHour.setTextSize(18);
-            loopHour.setLineSpacingMultiplier(2.5f);
-        }
-
-        if (needMin) {
-            loopMin.setItems(mins);
-            loopMin.setItemsVisibleCount(7);
-            loopMin.setCenterTextColor(Color.parseColor("#ff37d39e"));
-            loopMin.setTextSize(18);
-            loopMin.setLineSpacingMultiplier(2.5f);
-        }
-
-        if (needSecond) {
-            loopSecond.setItems(seconds);
-            loopSecond.setItemsVisibleCount(7);
-            loopSecond.setCenterTextColor(Color.parseColor("#ff37d39e"));
-            loopSecond.setTextSize(18);
-            loopSecond.setLineSpacingMultiplier(2.5f);
-        }
 
 
         Calendar calendar = Calendar.getInstance();
@@ -124,35 +71,59 @@ public class CustomDateTimerPicker extends Dialog {
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         min = calendar.get(Calendar.MINUTE);
         second = calendar.get(Calendar.SECOND);
-
-        loopYear.setCurrentPosition(years.indexOf("" + year));
-        loopMonth.setCurrentPosition(months.indexOf("" + month));
+        if (needYear) {
+            loopYear.setItems(years);
+            loopYear.setItemsVisibleCount(7);
+            loopYear.setCenterTextColor(Color.parseColor("#ff37d39e"));
+            loopYear.setTextSize(18);
+            loopYear.setLineSpacingMultiplier(2.5f);
+            loopYear.setInitPosition(years.indexOf("" + year));
+        }
+        if (needMonth)
         if (needHour) {
+            loopHour.setItems(hours);{
+                loopMonth.setItems(months);
+                loopMonth.setItemsVisibleCount(7);
+                loopMonth.setCenterTextColor(Color.parseColor("#ff37d39e"));
+                loopMonth.setTextSize(18);
+                loopMonth.setLineSpacingMultiplier(2.5f);
+                int monthPosition;
+                if (month<10)
+                    monthPosition=months.indexOf("0" + month);
+                else
+                    monthPosition=months.indexOf(month);
+                loopMonth.setInitPosition(monthPosition);
+            }
+            loopHour.setItemsVisibleCount(7);
+            loopHour.setCenterTextColor(Color.parseColor("#ff37d39e"));
+            loopHour.setTextSize(18);
+            loopHour.setLineSpacingMultiplier(2.5f);
             if (hour < 10) {
-                loopHour.setCurrentPosition(hours.indexOf("0" + hour));
+                loopHour.setInitPosition(hours.indexOf("0" + hour));
             } else {
-                loopHour.setCurrentPosition(hours.indexOf("" + hour));
+                loopHour.setInitPosition(hours.indexOf("" + hour));
             }
         }
+
         if (needMin) {
+            loopMin.setItems(mins);
+            loopMin.setItemsVisibleCount(7);
+            loopMin.setCenterTextColor(Color.parseColor("#ff37d39e"));
+            loopMin.setTextSize(18);
+            loopMin.setLineSpacingMultiplier(2.5f);
             if (min < 10) {
-                loopMin.setCurrentPosition(mins.indexOf("0" + min));
+                loopMin.setInitPosition(mins.indexOf("0" + min));
             } else {
-                loopMin.setCurrentPosition(mins.indexOf("" + min));
+                loopMin.setInitPosition(mins.indexOf("" + min));
             }
         }
+
         if (needSecond) {
-            if (second < 10) {
-                loopSecond.setCurrentPosition(seconds.indexOf("0" + min));
-            } else {
-                loopSecond.setCurrentPosition(seconds.indexOf("" + min));
-            }
-        }
-        if (needDay) {
-            loopDay.setItemsVisibleCount(7);
-            loopDay.setCenterTextColor(Color.parseColor("#ff37d39e"));
-            loopDay.setTextSize(18);
-            loopDay.setLineSpacingMultiplier(2.5f);
+            loopSecond.setItems(seconds);
+            loopSecond.setItemsVisibleCount(7);
+            loopSecond.setCenterTextColor(Color.parseColor("#ff37d39e"));
+            loopSecond.setTextSize(18);
+            loopSecond.setLineSpacingMultiplier(2.5f);
         }
 
         if ("yyyy-MM-dd HH:mm".equals(type)) {
@@ -169,36 +140,40 @@ public class CustomDateTimerPicker extends Dialog {
         }
 
         if (needDay) {
+            loopDay.setItemsVisibleCount(7);
+            loopDay.setCenterTextColor(Color.parseColor("#ff37d39e"));
+            loopDay.setTextSize(18);
+            loopDay.setLineSpacingMultiplier(2.5f);
             if (month != 2) {
                 if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
                     loopDay.setItems(days);
                     if (day < 10) {
-                        loopDay.setCurrentPosition(days.indexOf("0" + day));
+                        loopDay.setInitPosition(days.indexOf("0" + day));
                     } else {
-                        loopDay.setCurrentPosition(days.indexOf("" + day));
+                        loopDay.setInitPosition(days.indexOf("" + day));
                     }
                 } else {
                     loopDay.setItems(days2);
                     if (day < 10) {
-                        loopDay.setCurrentPosition(days2.indexOf("0" + day));
+                        loopDay.setInitPosition(days2.indexOf("0" + day));
                     } else {
-                        loopDay.setCurrentPosition(days2.indexOf("" + day));
+                        loopDay.setInitPosition(days2.indexOf("" + day));
                     }
                 }
             } else {
                 if (isLeapYear(year)) {
                     loopDay.setItems(leapYearFeb);
                     if (day < 10) {
-                        loopDay.setCurrentPosition(leapYearFeb.indexOf("0" + day));
+                        loopDay.setInitPosition(leapYearFeb.indexOf("0" + day));
                     } else {
-                        loopDay.setCurrentPosition(leapYearFeb.indexOf("" + day));
+                        loopDay.setInitPosition(leapYearFeb.indexOf("" + day));
                     }
                 } else {
                     loopDay.setItems(nonleapYearFeb);
                     if (day < 10) {
-                        loopDay.setCurrentPosition(nonleapYearFeb.indexOf("0" + day));
+                        loopDay.setInitPosition(nonleapYearFeb.indexOf("0" + day));
                     } else {
-                        loopDay.setCurrentPosition(nonleapYearFeb.indexOf("" + day));
+                        loopDay.setInitPosition(nonleapYearFeb.indexOf("" + day));
                     }
                 }
             }

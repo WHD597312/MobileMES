@@ -21,6 +21,7 @@ import com.supcon.whd.common.utils.ScreenUtil;
 import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Flowable;
@@ -51,6 +52,7 @@ public abstract class BaseActivity  extends AppCompatActivity implements SwipeBa
         onInit();
         initView();
         onListener();
+       // new ViewModelProvider(this,)
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

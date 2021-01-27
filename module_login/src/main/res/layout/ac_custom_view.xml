@@ -42,6 +42,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_5"
             />
+
         <EditText
             android:id="@+id/etNum"
             android:layout_width="match_parent"
@@ -56,12 +57,16 @@
             android:hint="请输入2"
             android:gravity="center_vertical"
             />
+        <TextView
+            android:id="@+id/testViewModel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40" />
     </LinearLayout>
 
     <View
+        android:layout_marginTop="@dimen/dp_300"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
-        android:layout_centerInParent="true"
         android:background="@color/purple" />
 
     <LinearLayout
@@ -72,13 +77,13 @@
 
         <LinearLayout
             android:layout_width="@dimen/dp_100"
-            android:layout_height="333.5dp"
+            android:layout_height="@dimen/dp_300"
             android:background="@color/red"
             android:orientation="vertical" />
 
         <LinearLayout
             android:layout_width="@dimen/dp_100"
-            android:layout_height="333.5dp"
+            android:layout_height="@dimen/dp_367"
             android:background="@color/blue"
             android:orientation="vertical" />
     </LinearLayout>
